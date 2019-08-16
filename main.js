@@ -2,13 +2,18 @@
 
 let axios = require('axios');
 
-let projects = [];
+let config = require('./config');
 
 const headers = {
-  "Authorization": "Bearer AAAAAAAAAAAAAAAAAAAAACnV%2FQAAAAAAkzfzakK%2BE5NPvqN9ess7cwYUqoI%3Dk6P7OQOFmfXHjQiiyZ3WRNLweO0sJIpfDzwVpP2UUzLOIB6Viy"
+  "Authorization": "Bearer " + config.accessToken
 };
 
-axios.get('https://api.twitter.com/1.1/search/tweets.json?q=%23devops&result_type=recent&count=100', {headers})
+const hashtag = encodeURIComponent(config.hashtags[0]);
+
+const url = config.url + "?q=" + hashtag + "&result_type=" + config.resultType + "&count=" + config.count;
+
+//axios.get('https://api.twitter.com/1.1/search/tweets.json?q=%23devops&result_type=recent&count=100', {headers})
+axios.get(url, {headers})
   .then(response => {
     console.log(response.data)
   })
