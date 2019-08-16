@@ -1,0 +1,18 @@
+{
+  "name": "tweet_retrieval_by_hashtag",
+  "version": "1.0.0",
+  "description": "Retrieve the last 100 tweets by hashtag",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Fabriciu/TweetRetrievalByHashtag.git"
+  },
+  "author": "Fabricio Borgatto",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "axios": "^0.16.2"
+  }
+}
