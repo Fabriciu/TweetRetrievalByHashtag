@@ -1,18 +1,18 @@
 'use strict';
 
-let axios = require('axios');
-let config = require('./config');
+var axios = require('axios')
+var config = require('./config')
 
-let MongoClient = require('mongodb').MongoClient;
-let mongoUrl = "mongodb+srv://"+config.mongoUser+":"+config.mongoPass+"@"+config.mongoCluster;
+var MongoClient = require('mongodb').MongoClient
+var mongoUrl = config.mongoUrl
 
 const headers = {
   "Authorization": "Bearer " + config.accessToken
-};
+}
 
 for(var hashtag of config.hashtags) {
 
-	var url = config.url;
+	var url = config.url
 
 	axios.get(url, {
 		params: {
@@ -40,7 +40,7 @@ for(var hashtag of config.hashtags) {
 		if(lastTweets.length > 0) {
 		    MongoClient.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
 		    	if(err) throw err;
-		    	var dbo = db.db("tweeterData")
+		    	var dbo = db.db("twitterData")
 		    	dbo.collection("lastTweets").insertMany(lastTweets, function(err, result) {
 		    		if(err) throw err;
 		    		console.log("Foram inseridos " + result.insertedCount + " documentos")
@@ -51,7 +51,7 @@ for(var hashtag of config.hashtags) {
 	  })
 	  .catch(function(error) {
 	    console.log(error)
-	  });
+	  })
 
 }
 
